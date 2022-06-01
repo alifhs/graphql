@@ -1,3 +1,5 @@
+import { Product } from "./products.model";
+
 const productSample = require('./products.sample').productsSample;
 
 export class ProductsService {
@@ -29,8 +31,8 @@ export class ProductsService {
         resolvers.Query.products = () => {
             return this.products;
         };
-        resolvers.Mutation.product = (_: any, product: any) => {
-            this.products.push(product);
+        resolvers.Mutation.product = (_: any, product: Product) => {
+            this.products.push(new Product(product.id, product.name, product.description, product.price));
             return product;
         };
 
